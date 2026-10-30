@@ -1,0 +1,9 @@
+node_modules/
+dist/
+release-artifacts/
+reports/
+*.tgz
+.env
+.env.*
+!.env.example
+!examples/*.env
