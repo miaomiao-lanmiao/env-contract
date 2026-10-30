@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "additionalVariables": "warn",
+  "variables": {
+    "API_URL": { "type": "url", "protocols": ["https:"] },
+    "API_TOKEN": { "type": "string", "minLength": 12 },
+    "APP_PORT": { "type": "integer", "minimum": 1, "maximum": 65535 },
+    "DEBUG": { "type": "boolean" },
+    "MODE": { "enum": ["development", "production"] },
+    "OPTIONAL_LABEL": { "required": false }
+  }
+}

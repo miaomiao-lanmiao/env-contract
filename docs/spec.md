@@ -14,7 +14,7 @@ MCP configuration analysis, Git reporting, log triage and folder snapshots.
 
 - `envcontract init --example FILE --output NEW_FILE`: create a contract of
   required string variables from example names. Never copy example values.
-- `envcontract check --contract FILE --env-file FILE`: report missing/empty,
+- `envcontract check --contract FILE --dotenv FILE`: report missing/empty,
   type/range/length/enum violations and unexpected variables. Optional
   `--format markdown|json|html`, `--output NEW_FILE`, and
   `--fail-on error|warning|none` (default error).
