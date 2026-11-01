@@ -1,5 +1,6 @@
 import { closeSync, constants, fstatSync, openSync, readSync, writeFileSync } from 'node:fs';
 import { InputError } from './errors.js';
+import { parseStrictJson } from './json.js';
 
 export function readText(path: string): string {
   let descriptor: number;
@@ -27,9 +28,7 @@ export function readText(path: string): string {
 }
 
 export function readJson(path: string): unknown {
-  const text = readText(path);
-  try { return JSON.parse(text); }
-  catch { throw new InputError('Contract file is not valid JSON.'); }
+  return parseStrictJson(readText(path));
 }
 
 export function output(content: string, path?: string): void {

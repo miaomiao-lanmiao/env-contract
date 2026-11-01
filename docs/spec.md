@@ -2,6 +2,9 @@
 
 Version: 0.1.0. Date: 2026-10-31 (Asia/Shanghai).
 
+Maintenance 0.1.1 (2026-11-01): contract text rejects duplicate JSON keys after
+escape decoding and JSON nesting beyond 128, with value-free errors.
+
 ## Purpose and users
 
 Small development teams need to catch missing, mistyped and unexpected environment
