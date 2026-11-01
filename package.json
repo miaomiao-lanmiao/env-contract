@@ -1,6 +1,6 @@
 {
   "name": "env-contract-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Offline dotenv contract validation with value-free reports.",
   "type": "module",
   "license": "MIT",

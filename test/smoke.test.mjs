@@ -85,5 +85,5 @@ for (const args of [
 test('global help/version and command help do not read files', () => {
   assert.equal(run(['--help']).status, 0);
   assert.equal(run(['check', '--help']).status, 0);
-  assert.equal(run(['--version']).stdout, '0.1.0\n');
+  assert.equal(run(['--version']).stdout, '0.1.1\n');
 });

@@ -79,6 +79,10 @@ digit, and are case sensitive. Contracts are a small versioned format; advanced
 JSON Schema features, conditional rules and user regular expressions are outside
 this release.
 
+Contract files reject duplicate JSON properties, including keys that become
+identical after JSON escape decoding. JSON nesting is limited to 128 levels.
+This prevents a later duplicate from silently overriding an earlier rule.
+
 ## 报告与 CI / Reports and CI
 
 ```sh
