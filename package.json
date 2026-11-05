@@ -1,6 +1,6 @@
 {
   "name": "env-contract-cli",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Offline dotenv contract validation with value-free reports.",
   "type": "module",
   "license": "MIT",
@@ -8,7 +8,7 @@
   "bin": { "envcontract": "dist/cli.js" },
   "exports": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist", "README.md", "LICENSE"],
+  "files": ["dist", "README.md", "LICENSE", "docs", "examples", "CONTRIBUTING.md", "SECURITY.md", "AGENTS.md"],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "npm run build && node --test test/*.test.mjs",

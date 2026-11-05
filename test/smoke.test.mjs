@@ -75,6 +75,22 @@ test('dotenv values named NODE_OPTIONS are data and do not configure Node', t =>
   assert.equal(JSON.parse(result.stdout).summary.valid, 1);
   assert.ok(!result.stdout.includes('--this-option-must-not-run'));
 });
+
+test('CLI reads Unicode separators as value data without exposing their contents', t => {
+  const directory = mkdtempSync(join(tmpdir(), 'env contract unicode '));
+  t.after(() => rmSync(directory, { recursive: true, force: true }));
+  const definition = join(directory, 'contract.json');
+  const input = join(directory, 'input.env');
+  const value = 'synthetic\u2028private\u2029value';
+  writeFileSync(definition, JSON.stringify({ schemaVersion: 1, variables: { ITEM: { enum: [value] }, NEXT: {} } }));
+  writeFileSync(input, `ITEM="${value}"\nNEXT=synthetic-next`);
+  const result = run(['check', '--contract', definition, '--dotenv', input, '--format', 'json']);
+  assert.equal(result.status, 0, result.stderr);
+  const report = JSON.parse(result.stdout);
+  assert.equal(report.summary.valid, 2);
+  assert.deepEqual(report.variables.map(variable => variable.line), [1, 2]);
+  assert.doesNotMatch(result.stdout + result.stderr, /synthetic|private|\u2028|\u2029/);
+});
 for (const args of [
   ['unknown'], ['init'], ['check'], ['check', '--contract'], ['init', '--example', 'a', '--format', 'json'],
   ['check', '--dotenv', 'a', '--dotenv', 'b'], ['check', '--contract', 'a', '--dotenv', 'b', '--format', 'xml'],
@@ -85,5 +101,5 @@ for (const args of [
 test('global help/version and command help do not read files', () => {
   assert.equal(run(['--help']).status, 0);
   assert.equal(run(['check', '--help']).status, 0);
-  assert.equal(run(['--version']).stdout, '0.1.1\n');
+  assert.equal(run(['--version']).stdout, '0.1.2\n');
 });

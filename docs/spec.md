@@ -5,6 +5,11 @@ Version: 0.1.0. Date: 2026-10-31 (Asia/Shanghai).
 Maintenance 0.1.1 (2026-11-01): contract text rejects duplicate JSON keys after
 escape decoding and JSON nesting beyond 128, with value-free errors.
 
+Maintenance 0.1.2 (2026-11-06): preserve Unicode line/paragraph separators inside
+dotenv values without changing LF/CRLF source lines. Ship the README's linked
+documentation and synthetic examples, and execute those examples after offline
+tarball installation.
+
 ## Purpose and users
 
 Small development teams need to catch missing, mistyped and unexpected environment

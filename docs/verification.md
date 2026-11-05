@@ -1,5 +1,13 @@
 # Verification record
 
+Maintenance 0.1.2, 2026-11-06 (Asia/Shanghai): Windows with Node.js v26.13.0,
+npm 11.20.0. A clean `npm ci --ignore-scripts` installation, all 62 tests, strict
+build, runtime static checks, offline tarball installation and source quickstart
+passed. New regressions reproduce Unicode-separator rejection and missing
+packaged quickstart inputs before their fixes. The tarball now includes linked
+documentation and runs both bundled synthetic examples outside the checkout.
+Hosted Linux/Windows/macOS CI at the release commit remains a separate gate.
+
 Date: 2026-10-31 (Asia/Shanghai). Local platform: Windows, Node.js v24.18.0.
 
 - 57 tests cover dotenv/contract parsing, all value constraints, name-only init,
