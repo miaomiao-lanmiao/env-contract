@@ -15,6 +15,15 @@ test('multiline quotes and supported escapes retain following source lines', () 
   assert.equal(result.get('A').value, 'first\nsecond\nthird\tend\\path"');
   assert.equal(result.get('B').line, 3);
 });
+
+test('Unicode line separators inside values stay data and preserve dotenv line numbers', () => {
+  const result = parseDotenv('SINGLE=\'one\u2028two\'\nDOUBLE="one\u2029two"\nPLAIN=one\u2028two\u2029three\nNEXT=value');
+  assert.equal(result.get('SINGLE').value, 'one\u2028two');
+  assert.equal(result.get('DOUBLE').value, 'one\u2029two');
+  assert.equal(result.get('PLAIN').value, 'one\u2028two\u2029three');
+  assert.equal(result.get('NEXT').line, 4);
+  assert.throws(() => parseDotenv('ITEM="synthetic\u2028private" trailing'), error => !error.message.includes('synthetic'));
+});
 test('unknown double-quote escapes preserve their backslash', () => {
   assert.equal(parseDotenv('PATH="C:\\Users\\project"').get('PATH').value, 'C:\\Users\\project');
 });

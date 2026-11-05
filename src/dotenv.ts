@@ -15,7 +15,7 @@ export function parseDotenv(input: string): Map<string, Binding> {
     let text = lines[index]!.trimStart();
     if (!text || text.startsWith('#')) continue;
     if (text.startsWith('export ' ) || text.startsWith('export\t')) text = text.slice(6).trimStart();
-    const assignment = /^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$/.exec(text);
+    const assignment = /^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)$/s.exec(text);
     if (!assignment || !VARIABLE_NAME.test(assignment[1]!)) throw new InputError(`Invalid dotenv assignment on line ${start}.`);
     const name = assignment[1]!;
     if (bindings.has(name)) throw new InputError(`Duplicate dotenv name on line ${start} (first defined on line ${bindings.get(name)!.line}).`);

@@ -41,6 +41,10 @@ envcontract check --contract env.contract.json --dotenv .env
 values are never copied. Edit the generated contract to declare types and limits.
 It will not replace an existing contract file.
 
+0.1.2 修复值中 Unicode 分隔符的解析，并将文档和合成示例加入安装包。
+Version 0.1.2 preserves Unicode line/paragraph separators inside dotenv values
+and includes the linked documentation and synthetic examples in the tarball.
+
 ## Contract v1
 
 ```json
@@ -110,6 +114,7 @@ for the synthetic invalid example. Neither contains the input values or enum cho
 ## Dotenv 支持范围 / Dotenv syntax
 
 - UTF-8 with optional BOM; CRLF/LF, comments, whitespace, optional `export`.
+- U+2028/U+2029 inside values remain data; only LF/CRLF delimit dotenv lines.
 - Unquoted, single-quoted, double-quoted and multiline quoted values.
 - Single quotes preserve contents. Double quotes support `\n`, `\r`, `\t`, `\\`,
   `\"`; unknown escapes retain their backslash.

@@ -37,5 +37,15 @@ try {
     : spawnSync(join(bin, 'envcontract'), ['--version'], { encoding: 'utf8' });
   assert.equal(installed.status, 0, installed.stderr);
   assert.equal(installed.stdout, `${manifest.version}\n`);
-  console.log('Offline tarball installation, installed executable and value-free validation passed.');
+  for (const [name, status, errors, warnings] of [['valid.env', 0, 0, 0], ['invalid.env', 2, 4, 1]]) {
+    const example = spawnSync(process.execPath, [join(packageRoot, 'dist/cli.js'), 'check',
+      '--contract', join(packageRoot, 'examples/contract.json'), '--dotenv', join(packageRoot, 'examples', name),
+      '--format', 'json'], { encoding: 'utf8', cwd: temporary, windowsHide: true, timeout: 15000 });
+    assert.equal(example.status, status, example.stderr);
+    const parsed = JSON.parse(example.stdout);
+    assert.equal(parsed.summary.errors, errors);
+    assert.equal(parsed.summary.warnings, warnings);
+    assert.doesNotMatch(example.stdout, /synthetic-example|unexpected-mode|70000|example\.invalid/);
+  }
+  console.log('Offline tarball installation, installed executable, packaged quickstart examples and value-free validation passed.');
 } finally { rmSync(temporary, { recursive: true, force: true }); }
